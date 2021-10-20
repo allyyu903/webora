@@ -333,7 +333,7 @@
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-									<div id="appletplace1" style="width:100%;height:100%;background-color:red"></div>
+									<div id="appletplace2" style="width:100%;height:100%;background-color:red"></div>
 									<a href="javascript:Jmol.script(jmol2,'animation off')"><button class="btn btn-secondary" href="">Stop</button></a>
 									<a href="javascript:Jmol.script(jmol2,'animation pause')"><button class="btn btn-secondary" href="">Pause</button></a>
 									<a href="javascript:Jmol.script(jmol2,'animation resume')"><button class="btn btn-secondary" href="">Resume</button></a>
@@ -565,6 +565,7 @@
 
 		$(document).ready(function(){
 		  $("#appletplace1").html(Jmol.getAppletHtml("jmol1", InfoA));
+		  $("#appletplace2").html(Jmol.getAppletHtml("jmol2", InfoB));
 		});
 
 		</script>
