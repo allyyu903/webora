@@ -79,7 +79,7 @@
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
-                            <img class="img-fluid" src="assets/img/portfolio/cake.png" alt="..." />
+                            <img class="img-fluid" src="assets/img/portfolio/ringopening.jpeg" alt="..." />
                         </div>
                     </div>
                     <!-- Portfolio Item 3-->
@@ -308,7 +308,7 @@
         </div>
         <!-- Portfolio Modal 2-->
         <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
+            <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
                     <div class="modal-body text-center pb-5">
@@ -316,7 +316,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Portfolio Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tasty Cake</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Cyclobutane Ringopening</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -324,10 +324,24 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Portfolio Modal - Image-->
-                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/cake.png" alt="..." />
+                                    <img class="img-fluid rounded mb-5" src="assets/img/portfolio/ringopening.jpeg" alt="..." />
                                     <!-- Portfolio Modal - Text-->
-                                    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                    <button class="btn btn-primary" href="#!" data-bs-dismiss="modal">
+                                    <p class="mb-4">Descriptions here.</p>
+									<!-- Icon Divider-->
+									<div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+									<div id="appletplace1" style="width:100%;height:100%;background-color:red"></div>
+									<a href="javascript:Jmol.script(jmol2,'animation off')"><button class="btn btn-secondary" href="">Stop</button></a>
+									<a href="javascript:Jmol.script(jmol2,'animation pause')"><button class="btn btn-secondary" href="">Pause</button></a>
+									<a href="javascript:Jmol.script(jmol2,'animation resume')"><button class="btn btn-secondary" href="">Resume</button></a>
+									<a href="javascript:Jmol.script(jmol2,'animation on')"><button class="btn btn-secondary" href="">Play</button></a>
+									</br>
+									</br>
+									</br>
+									<button class="btn btn-primary" href="" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
                                         Close Window
                                     </button>
@@ -524,12 +538,34 @@
 			//defaultModel: "$dopamine",
 			script: "load data/SN2.sdf;animation mode LOOP;animation off"
 		}
-
+		InfoB = {
+			width: "100%",
+			height: "100%",
+			debug: false,
+			color: "white",
+			addSelectionOptions: false,
+			serverURL: "https://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
+			use: "HTML5",
+		  coverImage: "",//"data/1hxw.png",        // initial image instead of applet
+		  coverScript: "",	// special script for click of cover image (otherwise equal to script)
+		  deferApplet: false,                  // wait to load applet until click
+		  deferUncover: false,                 // wait to uncover applet until script completed
+		  jarPath: "java",
+			j2sPath: "j2s",
+			jarFile: "JmolApplet.jar",
+			isSigned: false,
+			//disableJ2SLoadMonitor: true,
+			//disableInitialConsole: true,
+			readyFunction: jmol_isReady,
+			//defaultModel: "$dopamine",
+			script: "load data/cyclobutanetraj1.sdf;animation mode LOOP;animation off"
+		}
 
 		})();
 
 		$(document).ready(function(){
 		  $("#appletplace1").html(Jmol.getAppletHtml("jmol1", InfoA));
+		  $("#appletplace1").html(Jmol.getAppletHtml("jmol2", InfoB));
 		});
 
 		</script>
