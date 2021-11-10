@@ -3,7 +3,7 @@
     padding: 0;
 }
 .container{
-    height: 150vh;
+    height: 250vh;
     width: 100%;
     background-image: url(background.png);
     background-position:center;
@@ -61,8 +61,29 @@ nav ul li a{
     box-shadow: 3px 8px 22px rgba(94,28,68,0.15);
 }
 .feature-img{
-    height:90%;
+    height:60%;
     position: relative;
     bottom: 0;
-    right: 160px;
+    right: 500;
+}
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px ;
+}
+.grid-item {
+    background-color: white;
+    padding-top: 60px;
+    padding-right: 60px;
+    padding-left:60px;
+    border-width: 40px 40px 40px 40px;
+    border-color: #0F0A60;
+    border-style:solid;
+    border-radius: 12%;
+    padding: 140px;
+
 }
