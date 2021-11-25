@@ -20,25 +20,37 @@
         </div>
 		<div id="appletplace1" style="width:50%;height:30%;background-color:#0f0a60"></div>
 		<div class = "content">
+			<!--
 			<a href="javascript:Jmol.script(jmol1,'animation fps 10')" class="btn">Slow</a>
 			<a href="javascript:Jmol.script(jmol1,'animation fps 30')" class="btn">Normal</a>
 			<a href="javascript:Jmol.script(jmol1,'animation fps 50')" class="btn">Fast</a>
 			</br>
 			</br>
-			<!--<a href="javascript:Jmol.script(jmol1,'animation off')" class="btn">Stop</a>-->
+			-->
+			<a class="btn">FPS:</a>
+			<input id="fpsRange" type="range" min="1" max="60" value="30" oninput="javascript:Jmol.script(jmol1, 'animation fps ' + this.value); fpsAmount.value=this.value" />
+			<input id="fpsAmount" type="number" min="1" max="60" value="30" oninput="javascript:Jmol.script(jmol1, 'animation fps ' + this.value); fpsRange.value=this.value" />
+			</br>
+			</br>
+			<input type="checkbox" checked onchange="javascript:if (this.checked) {Jmol.script(jmol1,'animation resume');} else {Jmol.script(jmol1,'animation pause');}"/>
+
+			<input id="rangeInput" type="range" min="1" max="600" oninput="javascript:Jmol.script(jmol1, 'frame ' + this.value); amount.value=this.value" />
+			<input id="amount" type="number" min="1" max="600" oninput="javascript:Jmol.script(jmol1, 'frame ' + this.value); rangeInput.value=this.value" />
+			</br>
+			</br>
+			<!--<a href="javascript:Jmol.script(jmol1,'animation off')" class="btn">Stop</a>
 			<a href="javascript:Jmol.script(jmol1,'frame prev')" class="btn">Prev <<</a>
 			<a href="javascript:Jmol.script(jmol1,'animation pause')" class="btn">Pause ||</a>
 			<a href="javascript:Jmol.script(jmol1,'animation resume')" class="btn">Resume |></a>
-			<a href="javascript:Jmol.script(jmol1,'frame next')" class="btn">Next >></a>
-			<!--<a href="javascript:Jmol.script(jmol1,'animation on')" class="btn">Play</a>-->
+			<<a href="javascript:Jmol.script(jmol1,'frame next')" class="btn">Next >></a>
+			a href="javascript:Jmol.script(jmol1,'animation on')" class="btn">Play</a>-->
 		</div>
     </div>
 	<script type="text/javascript" src="../js/JSmol.min.js"></script>
        
 
 	<script type="text/javascript">
-
-		;(function() {
+		(function() {
 
 		// ?_USE=JAVA   ?_USE=SIGNED   ?_USE=HTML5
 
@@ -49,43 +61,52 @@
 		// System.out.println(x), document.title=x, or alert(x) 
 		// anywhere in the Java or Jmol code.
 
-		var s = document.location.search;
-		Jmol._debugCode = (s.indexOf("debugcode") >= 0);
+			var s = document.location.search;
+			Jmol._debugCode = (s.indexOf("debugcode") >= 0);
 
-		jmol_isReady = function(applet) {
-			document.title = (applet._id + " is ready")
-			Jmol._getElement(applet, "appletdiv").style.border="1px solid blue"
-		 
-		}		
+			jmol_isReady = function(applet) {
+				document.title = (applet._id + " is ready")
+				Jmol._getElement(applet, "appletdiv").style.border="1px solid blue"
+			}		
 
-		InfoA = {
-			width: "100%",
-			height: "100%",
-			debug: false,
-			color: "#0f0a60",
-			addSelectionOptions: false,
-			serverURL: "https://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
-			use: "HTML5",
-		    coverImage: "",//"data/1hxw.png",        // initial image instead of applet
-		    coverScript: "",	// special script for click of cover image (otherwise equal to script)
-		    deferApplet: false,                  // wait to load applet until click
-		    deferUncover: false,                 // wait to uncover applet until script completed
-		    jarPath: "java",
-			j2sPath: "../js/j2s",
-			jarFile: "JmolApplet.jar",
-			isSigned: false,
-			//disableJ2SLoadMonitor: true,
-			//disableInitialConsole: true,
-			readyFunction: jmol_isReady,
-			//defaultModel: "$dopamine",
-			script: "load ../assets/2-Bromobutane_SN2_2-Methoxybutane.sdf;animation mode loop;animation on;animation fps 30"
-		}
+			InfoA = {
+				width: "100%",
+				height: "100%",
+				debug: false,
+				color: "#0f0a60",
+				addSelectionOptions: false,
+				serverURL: "https://chemapps.stolaf.edu/jmol/jsmol/php/jsmol.php",
+				use: "HTML5",
+				coverImage: "",//"data/1hxw.png",        // initial image instead of applet
+				coverScript: "",	// special script for click of cover image (otherwise equal to script)
+				deferApplet: false,                  // wait to load applet until click
+				deferUncover: false,                 // wait to uncover applet until script completed
+				jarPath: "java",
+				j2sPath: "../js/j2s",
+				jarFile: "JmolApplet.jar",
+				isSigned: false,
+				//disableJ2SLoadMonitor: true,
+				//disableInitialConsole: true,
+				readyFunction: jmol_isReady,
+				//defaultModel: "$dopamine",
+				script: "load ../assets/2-Bromobutane_SN2_2-Methoxybutane.sdf;animation mode loop;animation on;animation fps 30; set AnimFrameCallback 'update';"
+			}
 
 		})();
 
 		$(document).ready(function(){
 		  $("#appletplace1").html(Jmol.getAppletHtml("jmol1", InfoA));
 		});
+		
+		function update(app, frameNo, fileNo, modelNo, firstNo, lastNo){
+			amount.value = modelNo;
+			rangeInput.value = modelNo;
+			amount.max = lastNo - fileNo * 1000000;
+			rangeInput.max = lastNo - fileNo * 1000000;
+		}
+		
+
+		
 
 	</script>
 </body>
