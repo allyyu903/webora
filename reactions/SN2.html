@@ -54,7 +54,7 @@
 		//	Jmol._getElement(applet, "appletdiv").style.border="1px solid blue"
 		//}		
 		
-		update = function(app, frameNo, fileNo, modelNo, firstNo, lastNo){
+		update = function(_, _, _, modelNo, _, lastNo){
 			timelineAmount.value = modelNo;
 			timelineRange.value = modelNo;
 			timelineAmount.max = lastNo - fileNo * 1000000;
