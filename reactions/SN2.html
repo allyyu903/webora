@@ -20,14 +20,15 @@
         </div>
 		<div id="appletplace1" style="width:50%;height:30%;background-color:#0f0a60"></div>
 		<div class = "content">
-			<a class="btn">FPS:</a>
-			<input id="fpsRange" type="range" min="1" max="60" value="30" oninput="javascript:Jmol.script(jmolA, 'animation fps ' + this.value); fpsAmount.value=this.value" />
-			<input id="fpsAmount" type="number" min="1" max="60" value="30" oninput="javascript:Jmol.script(jmolA, 'animation fps ' + this.value); fpsRange.value=this.value" />
-			</br>
-			</br>
-			<input type="checkbox" checked onchange="javascript:if (this.checked) {Jmol.script(jmolA,'animation resume');} else {Jmol.script(jmolA,'animation pause');}"/>
+			<input type="checkbox" onchange="javascript:if (this.checked) {Jmol.script(jmolA,'animation resume');} else {Jmol.script(jmolA,'animation pause');}"/>
 			<input id="timelineRange" type="range" min="1" max="600" oninput="javascript:Jmol.script(jmolA, 'frame ' + this.value); timelineAmount.value=this.value" />
 			<input id="timelineAmount" type="number" min="1" max="600" oninput="javascript:Jmol.script(jmolA, 'frame ' + this.value); timelineRange.value=this.value" />
+			<a class="btn" href="javascript: Jmol.script(jmolA, 'frame ' + tsFrameA);">TS</a>
+			</br>
+			</br>
+			<a class="btn">Speed</a>
+			<input id="fpsRange" type="range" min="1" max="60" value="30" oninput="javascript:Jmol.script(jmolA, 'animation fps ' + this.value); fpsAmount.value=this.value" />
+			<input id="fpsAmount" type="number" min="1" max="60" value="30" oninput="javascript:Jmol.script(jmolA, 'animation fps ' + this.value); fpsRange.value=this.value" />
 			</br>
 			</br>
 		</div>
@@ -54,13 +55,13 @@
 		//	Jmol._getElement(applet, "appletdiv").style.border="1px solid blue"
 		//}		
 		
-		update = function(_, _, _, modelNo, _, lastNo){
+		update = function(_, _, fileNo, modelNo, _, lastNo){
 			timelineAmount.value = modelNo;
 			timelineRange.value = modelNo;
 			timelineAmount.max = lastNo - fileNo * 1000000;
 			timelineRange.max = lastNo - fileNo * 1000000;
 		}
-		
+		var tsFrameA = '500';
 		InfoA = {
 			width: "100%",
 			height: "100%",
@@ -81,7 +82,7 @@
 			//disableInitialConsole: true,
 			//readyFunction: jmol_isReady,
 			//defaultModel: "$dopamine",
-			script: "load ../assets/2-Bromobutane_SN2_2-Methoxybutane.sdf;animation mode loop;animation on;animation fps 30; set AnimFrameCallback 'update';"
+			script: "load ../assets/2-Bromobutane_SN2_2-Methoxybutane.sdf;animation mode loop;animation off;animation fps 30; set measurements angstroms; set AnimFrameCallback 'update';"
 		}
 		
 		$(document).ready(function(){
